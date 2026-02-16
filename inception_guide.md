@@ -56,8 +56,8 @@ Set up a small infrastructure using Docker Compose with multiple services runnin
    │    (Volume)     │  │    (Volume)    │
    └─────────────────┘  └────────────────┘
          │                      │
-   /home/login/data/wordpress   │
-                    /home/login/data/mariadb
+   /home/sel-mlil/data/wordpress   │
+                    /home/sel-mlil/data/mariadb
 ```
 
 ### Bonus Services (Optional)
@@ -165,7 +165,7 @@ Create `srcs/.env`:
 
 ```bash
 # Domain Configuration
-DOMAIN_NAME=login.42.fr
+DOMAIN_NAME=sel-mlil.42.fr
 
 # MariaDB Configuration
 MYSQL_DATABASE=wordpress
@@ -175,9 +175,9 @@ MYSQL_PASSWORD=secure_wp_password
 # WordPress Configuration
 WP_ADMIN_USER=wpadmin
 WP_ADMIN_PASSWORD=secure_admin_password
-WP_ADMIN_EMAIL=admin@login.42.fr
+WP_ADMIN_EMAIL=admin@sel-mlil.42.fr
 WP_USER=wpuser2
-WP_USER_EMAIL=user@login.42.fr
+WP_USER_EMAIL=user@sel-mlil.42.fr
 WP_USER_PASSWORD=secure_user_password
 WP_TITLE=Inception Website
 
@@ -386,7 +386,7 @@ RUN mkdir -p /etc/nginx/ssl && \
     openssl req -x509 -nodes -days 365 -newkey rsa:2048 \
     -keyout /etc/nginx/ssl/inception.key \
     -out /etc/nginx/ssl/inception.crt \
-    -subj "/C=FR/ST=Paris/L=Paris/O=42/OU=42/CN=login.42.fr"
+    -subj "/C=FR/ST=Paris/L=Paris/O=42/OU=42/CN=sel-mlil.42.fr"
 
 COPY conf/nginx.conf /etc/nginx/nginx.conf
 
@@ -410,7 +410,7 @@ http {
         listen 443 ssl;
         listen [::]:443 ssl;
         
-        server_name login.42.fr;
+        server_name sel-mlil.42.fr;
         
         ssl_protocols TLSv1.2 TLSv1.3;
         ssl_certificate /etc/nginx/ssl/inception.crt;
@@ -495,14 +495,14 @@ volumes:
     driver_opts:
       type: none
       o: bind
-      device: /home/login/data/mariadb
+      device: /home/sel-mlil/data/mariadb
   
   wordpress_data:
     driver: local
     driver_opts:
       type: none
       o: bind
-      device: /home/login/data/wordpress
+      device: /home/sel-mlil/data/wordpress
 
 networks:
   inception-network:
@@ -681,7 +681,7 @@ CMD ["nginx", "-g", "daemon off;"]
 Add to `/etc/hosts`:
 
 ```bash
-127.0.0.1 login.42.fr
+127.0.0.1 sel-mlil.42.fr
 ```
 
 ### Testing Commands
@@ -709,7 +709,7 @@ docker logs wordpress
 docker logs mariadb
 
 # Access website
-curl -k https://login.42.fr
+curl -k https://sel-mlil.42.fr
 ```
 
 ### Validation Checklist
@@ -723,7 +723,7 @@ curl -k https://login.42.fr
 - [ ] Two WordPress users created
 - [ ] Admin username doesn't contain "admin"
 - [ ] No `latest` tag used
-- [ ] Volumes stored in /home/login/data
+- [ ] Volumes stored in /home/sel-mlil/data
 - [ ] No infinite loops (tail -f, sleep infinity, etc.)
 - [ ] No --link or network: host
 - [ ] README.md, USER_DOC.md, DEV_DOC.md present
@@ -764,7 +764,7 @@ docker exec -it nginx bash
 openssl req -x509 -nodes -days 365 -newkey rsa:2048 \
   -keyout /etc/nginx/ssl/inception.key \
   -out /etc/nginx/ssl/inception.crt \
-  -subj "/C=FR/ST=Paris/L=Paris/O=42/CN=login.42.fr"
+  -subj "/C=FR/ST=Paris/L=Paris/O=42/CN=sel-mlil.42.fr"
 ```
 
 ### Issue 5: Containers Exit Immediately

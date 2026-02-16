@@ -102,7 +102,7 @@ EOF
 ```bash
 cat > srcs/.env << 'EOF'
 # Domain Configuration
-DOMAIN_NAME=login.42.fr
+DOMAIN_NAME=sel-mlil.42.fr
 
 # MariaDB Configuration
 MYSQL_ROOT_PASSWORD=your_root_password_here
@@ -113,9 +113,9 @@ MYSQL_PASSWORD=your_db_password_here
 # WordPress Configuration
 WP_ADMIN_USER=wpadmin
 WP_ADMIN_PASSWORD=your_admin_password_here
-WP_ADMIN_EMAIL=admin@login.42.fr
+WP_ADMIN_EMAIL=admin@sel-mlil.42.fr
 WP_USER=wpuser2
-WP_USER_EMAIL=user@login.42.fr
+WP_USER_EMAIL=user@sel-mlil.42.fr
 WP_USER_PASSWORD=your_user_password_here
 WP_TITLE=Inception Website
 
@@ -151,7 +151,7 @@ chmod 600 secrets/*
 
 ```bash
 # Add domain to hosts file
-echo "127.0.0.1 login.42.fr" | sudo tee -a /etc/hosts
+echo "127.0.0.1 sel-mlil.42.fr" | sudo tee -a /etc/hosts
 ```
 
 Replace `login` with your actual 42 login throughout.
@@ -189,8 +189,8 @@ Replace `login` with your actual 42 login throughout.
          ▼
 ┌─────────────────────────────────┐
 │  Persistent Volumes             │
-│  - /home/login/data/mariadb     │
-│  - /home/login/data/wordpress   │
+│  - /home/sel-mlil/data/mariadb     │
+│  - /home/sel-mlil/data/wordpress   │
 └─────────────────────────────────┘
 ```
 
@@ -205,7 +205,7 @@ Replace `login` with your actual 42 login throughout.
 ### Volume Structure
 
 ```
-/home/login/data/
+/home/sel-mlil/data/
 ├── mariadb/           # Database files
 │   ├── mysql/         # System database
 │   ├── wordpress/     # WordPress database
@@ -317,7 +317,7 @@ docker ps
 docker compose -f srcs/docker-compose.yml logs
 
 # Test endpoints
-curl -k https://login.42.fr
+curl -k https://sel-mlil.42.fr
 ```
 
 ---
@@ -444,7 +444,7 @@ volumes:
     driver_opts:
       type: none
       o: bind
-      device: /home/login/data/mariadb
+      device: /home/sel-mlil/data/mariadb
 ```
 
 **This creates a bind-mounted named volume:**
@@ -458,7 +458,7 @@ volumes:
 
 ```bash
 # MariaDB data
-/home/login/data/mariadb/
+/home/sel-mlil/data/mariadb/
 ├── aria_log_control
 ├── ib_buffer_pool
 ├── ibdata1
@@ -466,7 +466,7 @@ volumes:
 └── wordpress/
 
 # WordPress data
-/home/login/data/wordpress/
+/home/sel-mlil/data/wordpress/
 ├── index.php
 ├── wp-admin/
 ├── wp-content/
@@ -601,7 +601,7 @@ docker compose -f srcs/docker-compose.yml up -d --force-recreate nginx
 docker logs nginx
 
 # Test functionality
-curl -k https://login.42.fr
+curl -k https://sel-mlil.42.fr
 ```
 
 **4. Debug if needed:**
@@ -913,7 +913,7 @@ truncate -s 0 /var/lib/docker/containers/*/*-json.log
 
 ```bash
 # Test SSL certificate
-openssl s_client -connect login.42.fr:443 -showcerts
+openssl s_client -connect sel-mlil.42.fr:443 -showcerts
 
 # Verify certificate in container
 docker exec nginx openssl x509 -in /etc/nginx/ssl/inception.crt -text -noout
@@ -922,7 +922,7 @@ docker exec nginx openssl x509 -in /etc/nginx/ssl/inception.crt -text -noout
 docker exec nginx nginx -T | grep ssl
 
 # Test TLS versions
-nmap --script ssl-enum-ciphers -p 443 login.42.fr
+nmap --script ssl-enum-ciphers -p 443 sel-mlil.42.fr
 ```
 
 ### Database Issues
@@ -1164,8 +1164,8 @@ docker stats --no-stream --format "table {{.Name}}\t{{.CPUPerc}}\t{{.MemUsage}}"
 
 | Path | Description |
 |------|-------------|
-| `/home/login/data/mariadb` | Database files |
-| `/home/login/data/wordpress` | WordPress files |
+| `/home/sel-mlil/data/mariadb` | Database files |
+| `/home/sel-mlil/data/wordpress` | WordPress files |
 | `/var/lib/docker/volumes` | Docker volumes |
 | `/run/secrets/` | Mounted secrets in containers |
 

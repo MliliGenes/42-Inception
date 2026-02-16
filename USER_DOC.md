@@ -107,7 +107,7 @@ mariadb     mariadb     Up 2 mins
 
 ### WordPress Website
 
-**URL:** https://login.42.fr (replace `login` with your actual login)
+**URL:** https://sel-mlil.42.fr (replace `login` with your actual login)
 
 **First visit:**
 1. Your browser will show a security warning (self-signed certificate)
@@ -116,7 +116,7 @@ mariadb     mariadb     Up 2 mins
 
 ### WordPress Administration Panel
 
-**URL:** https://login.42.fr/wp-admin
+**URL:** https://sel-mlil.42.fr/wp-admin
 
 **Login credentials:**
 - **Admin User**:
@@ -136,7 +136,7 @@ mariadb     mariadb     Up 2 mins
 
 ### Adminer (if configured)
 
-**URL:** https://login.42.fr/adminer
+**URL:** https://sel-mlil.42.fr/adminer
 
 **Login credentials:**
 - System: MySQL
@@ -148,7 +148,7 @@ mariadb     mariadb     Up 2 mins
 ### FTP Access (if configured)
 
 **Connection details:**
-- Host: login.42.fr
+- Host: sel-mlil.42.fr
 - Port: 21
 - Protocol: FTP
 - Username: (configured in FTP setup)
@@ -158,7 +158,7 @@ mariadb     mariadb     Up 2 mins
 - FileZilla (GUI)
 - WinSCP (Windows)
 - Cyberduck (Mac)
-- Command line: `ftp login.42.fr`
+- Command line: `ftp sel-mlil.42.fr`
 
 ---
 
@@ -236,7 +236,7 @@ docker ps
 **1. NGINX (Web Server)**
 ```bash
 # Check NGINX is responding
-curl -k https://login.42.fr
+curl -k https://sel-mlil.42.fr
 
 # View NGINX logs
 docker logs nginx
@@ -307,7 +307,7 @@ docker stats
 
 ### Creating Content
 
-1. Log into WordPress admin (https://login.42.fr/wp-admin)
+1. Log into WordPress admin (https://sel-mlil.42.fr/wp-admin)
 2. Click "Posts" → "Add New" or "Pages" → "Add New"
 3. Enter your title and content
 4. Click "Publish"
@@ -383,7 +383,7 @@ docker exec wordpress wp theme update --all --allow-root
 
 ### Website Not Accessible
 
-**Symptom:** Cannot access https://login.42.fr
+**Symptom:** Cannot access https://sel-mlil.42.fr
 
 **Solutions:**
 
@@ -397,7 +397,7 @@ docker exec wordpress wp theme update --all --allow-root
    ```bash
    cat /etc/hosts | grep 42.fr
    ```
-   Should show: `127.0.0.1 login.42.fr`
+   Should show: `127.0.0.1 sel-mlil.42.fr`
 
 3. **Check NGINX logs:**
    ```bash
@@ -406,7 +406,7 @@ docker exec wordpress wp theme update --all --allow-root
 
 4. **Test with curl:**
    ```bash
-   curl -k https://login.42.fr
+   curl -k https://sel-mlil.42.fr
    ```
 
 ### White Screen / 500 Error
@@ -631,6 +631,6 @@ make start
 
 ---
 
-**Last Updated:** [Current Date]  
+**Last Updated:** [02/16/2026]  
 **Version:** 1.0  
-**Maintainer:** [Your Name/Login]
+**Maintainer:** [sel-mlil]

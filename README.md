@@ -1,6 +1,6 @@
 # Inception
 
-*This project has been created as part of the 42 curriculum by [your_login].*
+*This project has been created as part of the 42 curriculum by sel-mlil.*
 
 ## Description
 
@@ -37,7 +37,7 @@ This project deepens understanding of:
    - Edit `srcs/.env` and replace placeholders with your values:
      - Replace `login` with your 42 login
      - Set secure passwords for database and WordPress users
-     - Configure domain name (login.42.fr)
+     - Configure domain name (sel-mlil.42.fr)
 
 3. **Set up secrets**
    ```bash
@@ -49,7 +49,7 @@ This project deepens understanding of:
 
 4. **Update /etc/hosts**
    ```bash
-   sudo echo "127.0.0.1 login.42.fr" >> /etc/hosts
+   sudo echo "127.0.0.1 sel-mlil.42.fr" >> /etc/hosts
    ```
    Replace `login` with your actual login.
 
@@ -83,8 +83,8 @@ make status
 
 ### Access the Application
 
-- **WordPress Website**: https://login.42.fr (replace `login` with your login)
-- **WordPress Admin**: https://login.42.fr/wp-admin
+- **WordPress Website**: https://sel-mlil.42.fr (replace `login` with your login)
+- **WordPress Admin**: https://sel-mlil.42.fr/wp-admin
   - Username: (as configured in .env)
   - Password: (as configured in .env)
 
@@ -297,7 +297,7 @@ docker ps
 cat /etc/hosts | grep 42.fr
 
 # Test SSL
-curl -k https://login.42.fr
+curl -k https://sel-mlil.42.fr
 ```
 
 **Database connection failed:**
@@ -324,7 +324,7 @@ This project is part of the 42 School curriculum and is subject to the school's 
 
 ## Author
 
-[Your Name] - [your_login]@student.42.fr
+sel-mlil
 
 ## Acknowledgments
 
