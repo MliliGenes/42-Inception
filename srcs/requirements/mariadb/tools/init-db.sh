@@ -1,15 +1,15 @@
 #!/bin/bash
 # MariaDB initialization script
 
-
-#* we have to check if the database was initilized before, if not we have to run the follwing cmd to create the system files for mariadb ( defualt tables and so on )
+# check if the database was initialized before
 if [ ! -d "/var/lib/mysql/mysql" ]; then
     echo "Initializing MariaDB database..."
+    
+    # create system files for mariadb
     mysql_install_db --user=mysql --datadir=/var/lib/mysql
-fi
 
-# Start MariaDB temporarily
-mysqld --user=mysql --bootstrap << EOF
+    # run bootstrap ONLY on first start
+    mysqld --user=mysql --bootstrap << EOF
 USE mysql;
 FLUSH PRIVILEGES;
 
@@ -25,7 +25,12 @@ GRANT ALL PRIVILEGES ON ${MYSQL_DATABASE}.* TO '${MYSQL_USER}'@'%';
 FLUSH PRIVILEGES;
 EOF
 
-echo "MariaDB initialization complete."
+    echo "MariaDB initialization complete."
+else
+    echo "MariaDB already initialized, skipping..."
+fi
 
-# Start MariaDB we use EXEC so the entrypoint process will be the PID 1 and will recive all the signals correctly, so it can shutdown when needed
+# Start MariaDB as PID 1
 exec mysqld --user=mysql --console
+
+#* bootstrap mode to only read queries from stdin and exit when done

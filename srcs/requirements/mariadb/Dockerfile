@@ -14,6 +14,8 @@ RUN mkdir -p /var/run/mysqld && \
     chown -R mysql:mysql /var/run/mysqld && \
     chmod 777 /var/run/mysqld
 
+VOLUME ["/var/lib/mysql"]
+
 EXPOSE 3306
 
 ENTRYPOINT ["/usr/local/bin/init-db.sh"]

@@ -3,12 +3,12 @@ name: inception
 # Docker Compose configuration
 services:
   mariadb:
+    networks:
+      - inception_network
     build: ./requirements/mariadb
     container_name: mariadb
     restart: always
     env_file: .env
-    ports:
-      - "3306:3306"
     volumes:
       - db_data:/var/lib/mysql
 
