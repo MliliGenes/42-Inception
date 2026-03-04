@@ -11,6 +11,9 @@ services:
     env_file: .env
     volumes:
       - db_data:/var/lib/mysql
+    secrets:
+      - db_root_password
+      - db_password
 
 #costume network for the project
 networks:
@@ -32,3 +35,9 @@ volumes:
       type: none
       device: /home/sel/data/wp
       o: bind
+
+secrets:
+  db_root_password:
+    file: ./secrets/db_root_password.txt
+  db_password:
+    file: ./secrets/db_password.txt

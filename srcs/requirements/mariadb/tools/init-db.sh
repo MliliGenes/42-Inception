@@ -1,6 +1,10 @@
 #!/bin/bash
 # MariaDB initialization script
 
+# read secrets from files
+MYSQL_ROOT_PASSWORD=$(cat /run/secrets/db_root_password)
+MYSQL_PASSWORD=$(cat /run/secrets/db_password)
+
 # check if the database was initialized before
 if [ ! -d "/var/lib/mysql/mysql" ]; then
     echo "Initializing MariaDB database..."
