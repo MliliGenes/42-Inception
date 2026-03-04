@@ -3,7 +3,6 @@
 
 
 #* we have to check if the database was initilized before, if not we have to run the follwing cmd to create the system files for mariadb ( defualt tables and so on )
-
 if [ ! -d "/var/lib/mysql/mysql" ]; then
     echo "Initializing MariaDB database..."
     mysql_install_db --user=mysql --datadir=/var/lib/mysql
@@ -28,5 +27,5 @@ EOF
 
 echo "MariaDB initialization complete."
 
-# Start MariaDB
+# Start MariaDB we use EXEC so the entrypoint process will be the PID 1 and will recive all the signals correctly, so it can shutdown when needed
 exec mysqld --user=mysql --console
