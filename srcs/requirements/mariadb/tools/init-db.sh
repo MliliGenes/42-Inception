@@ -1,6 +1,9 @@
 #!/bin/bash
 # MariaDB initialization script
 
+
+#* we have to check if the database was initilized before, if not we have to run the follwing cmd to create the system files for mariadb ( defualt tables and so on )
+
 if [ ! -d "/var/lib/mysql/mysql" ]; then
     echo "Initializing MariaDB database..."
     mysql_install_db --user=mysql --datadir=/var/lib/mysql
