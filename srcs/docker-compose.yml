@@ -3,17 +3,17 @@ name: inception
 # Docker Compose configuration
 services:
   mariadb:
-    networks:
-      - inception_network
-    build: ./requirements/mariadb
     container_name: mariadb
-    restart: always
+    build: ./requirements/mariadb
+    restart: on-failure
     env_file: .env
     volumes:
-      - db_data:/var/lib/mysql
+      - mdb:/var/lib/mysql
     secrets:
       - db_root_password
       - db_password
+    networks:
+      - inception_network
 
 #costume network for the project
 networks:
@@ -23,18 +23,16 @@ networks:
 
 # named volume for both mariadb and wordpress
 volumes:
-  db_data:
-    driver: local
-    driver_opts:
-      type: none
+  mdb:
+   driver_opts:
+      type: 'none'
+      o: bind
       device: /home/sel/data/db
+  wp:
+   driver_opts:
+      type: 'none'
       o: bind
-  wp_data:
-    driver: local
-    driver_opts:
-      type: none
       device: /home/sel/data/wp
-      o: bind
 
 secrets:
   db_root_password:
