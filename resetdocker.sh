@@ -2,7 +2,7 @@
 docker compose down -v
 
 # clear the data directory
-sudo rm -rf /home/sel/data/db/*
+sudo rm -rf /home/sel/data/mysql/*
 
 # rebuild and start
 docker compose up --build -d
