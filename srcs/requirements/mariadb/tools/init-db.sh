@@ -2,11 +2,16 @@
 # MariaDB initialization script
 
 # # read secrets from files
-# MYSQL_ROOT_PASSWORD=$(cat /run/secrets/db_root_password)
-# MYSQL_PASSWORD=$(cat /run/secrets/db_password)
+MYSQL_ROOT_PASSWORD=$(cat /run/secrets/db_root_password)
+MYSQL_PASSWORD=$(cat /run/secrets/db_password)
 
-echo $MYSQL_ROOT_PASSWORD
-echo $MYSQL_PASSWORD
+# echo $MYSQL_ROOT_PASSWORD
+# echo $MYSQL_PASSWORD
+
+# debug - check vars are set
+echo "DATABASE: ${MYSQL_DATABASE}"
+echo "USER: ${MYSQL_USER}"
+echo "PASSWORD LENGTH: ${#MYSQL_PASSWORD}" 
 
 # check if the database was initialized before
 if [ ! -d "/var/lib/mysql/mysql" ]; then
@@ -25,7 +30,9 @@ DELETE FROM mysql.user WHERE User='root' AND Host NOT IN ('localhost', '127.0.0.
 
 ALTER USER 'root'@'localhost' IDENTIFIED BY '${MYSQL_ROOT_PASSWORD}';
 
+SELECT '${MYSQL_DATABASE}' AS 'db_check';
 CREATE DATABASE IF NOT EXISTS ${MYSQL_DATABASE};
+
 CREATE USER IF NOT EXISTS '${MYSQL_USER}'@'%' IDENTIFIED BY '${MYSQL_PASSWORD}';
 GRANT ALL PRIVILEGES ON ${MYSQL_DATABASE}.* TO '${MYSQL_USER}'@'%';
 
