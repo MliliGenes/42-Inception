@@ -14,6 +14,23 @@ services:
     secrets:
       - db_root_password
       - db_password
+  wordpress:
+    depends_on:
+      - mariadb
+    networks:
+      - inception_network
+    build: ./requirements/wordpress
+    container_name: wordpress
+    restart: always
+    env_file: .env
+    ports:
+      - "80:80"
+    volumes:
+      - wp_data:/var/www/html
+    secrets:
+      - db_password
+      - wp_admin_password
+      - wp_user_password
 
 #costume network for the project
 networks:
@@ -39,3 +56,7 @@ secrets:
     file: ./secrets/db_root_password.txt
   db_password:
     file: ./secrets/db_password.txt
+  wp_admin_password:
+    file: ./secrets/wp_admin_password.txt
+  wp_user_password:
+    file: ./secrets/wp_user_password.txt
