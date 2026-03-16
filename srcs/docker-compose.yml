@@ -14,15 +14,26 @@ services:
     secrets:
       - db_root_password
       - db_password
+  redis:
+    networks:
+      - inception_network
+    build: ./requirements/redis
+    container_name: redis
+    restart: always
+
   wordpress:
     depends_on:
       - mariadb
+      - redis
     networks:
       - inception_network
     build: ./requirements/wordpress
     container_name: wordpress
     restart: always
     env_file: .env
+    environment:
+      REDIS_HOST: redis
+      REDIS_PORT: "6379"
     volumes:
       - wp_data:/var/www/html
     secrets:

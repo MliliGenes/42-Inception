@@ -22,6 +22,8 @@ RUN apt-get update && apt-get install -y \
     php-xml \
     # PHP extension for ZIP archive support
     php-zip \
+    # PHP extension for Redis connectivity
+    php-redis \
     # Archive extraction utility (used for WordPress tarball)
     tar \
     # Download utility for fetching WordPress archive

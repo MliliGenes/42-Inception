@@ -44,7 +44,25 @@ if ! wp core is-installed --path="$WP_PATH" --allow-root; then
     --allow-root
 fi
 
+# --- Redis object cache setup ---
+# Add Redis connection constants to wp-config.php (idempotent)
+if ! wp config has WP_REDIS_HOST --path="$WP_PATH" --allow-root 2>/dev/null; then
+  wp config set WP_REDIS_HOST     "${REDIS_HOST:-redis}" --path="$WP_PATH" --allow-root
+  wp config set WP_REDIS_PORT     "${REDIS_PORT:-6379}"  --path="$WP_PATH" --allow-root
+  wp config set WP_CACHE          true --raw                 --path="$WP_PATH" --allow-root
+fi
+
+# Install and enable the redis-cache plugin if not already present
+if ! wp plugin is-installed redis-cache --path="$WP_PATH" --allow-root 2>/dev/null; then
+  wp plugin install redis-cache --activate --path="$WP_PATH" --allow-root
+fi
+
+# Enable the object-cache drop-in (copies object-cache.php into wp-content/)
+wp redis enable --path="$WP_PATH" --allow-root || true
+
+# ---------------------------------
+
 chown -R www-data:www-data "$WP_PATH"
 mkdir -p /run/php
 chown -R www-data:www-data /run/php
-exec php-fpm7.4 -F  
+exec php-fpm7.4 -F
