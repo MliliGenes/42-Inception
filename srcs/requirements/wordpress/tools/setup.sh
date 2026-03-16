@@ -44,10 +44,7 @@ if ! wp core is-installed --path="$WP_PATH" --allow-root; then
     --allow-root
 fi
 
-  # WP_URL_CLEAN="${WP_URL%/}"
-  # wp option update home "$WP_URL_CLEAN" --path="$WP_PATH" --allow-root
-  # wp option update siteurl "$WP_URL_CLEAN" --path="$WP_PATH" --allow-root
-
 chown -R www-data:www-data "$WP_PATH"
-# exec php-fpm7.4 -F
-exec php -S 0.0.0.0:80 -t /var/www/html
+mkdir -p /run/php
+chown -R www-data:www-data /run/php
+exec php-fpm7.4 -F  

@@ -35,17 +35,19 @@ RUN apt-get update && apt-get install -y \
 RUN curl -o /usr/local/bin/wp https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar \
     && chmod +x /usr/local/bin/wp
 
+RUN sed -i 's|^listen = .*|listen = 9000|' /etc/php/7.4/fpm/pool.d/www.conf
 
+#! wp tarball (for manual installation)
 RUN mkdir -p /var/www \
     && wget https://wordpress.org/latest.tar.gz -O /tmp/wordpress.tar.gz \
     && tar -xzf /tmp/wordpress.tar.gz -C /var/www/ \
     && mv /var/www/wordpress /var/www/html \
     && rm /tmp/wordpress.tar.gz
 
-# Set WordPress directory
+#! Set WordPress directory
 WORKDIR /var/www/html
 
-# Optional: your wp-config.php template or init scripts
+#! Entry point setup
 COPY tools/setup.sh /usr/local/bin/
 RUN chmod +x /usr/local/bin/setup.sh
 
@@ -53,7 +55,7 @@ RUN chmod +x /usr/local/bin/setup.sh
 RUN chown -R www-data:www-data /var/www/html \
     && chmod -R 755 /var/www/html
 
-EXPOSE 80
+EXPOSE 9000
 
 # Use your init script to handle config and start PHP-FPM
 ENTRYPOINT ["/usr/local/bin/setup.sh"]

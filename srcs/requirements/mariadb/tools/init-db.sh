@@ -48,5 +48,4 @@ else
 fi
 
 exec mysqld --user=mysql --console
-
 #* bootstrap mode to only read queries from stdin and exit when done
