@@ -24,6 +24,10 @@ fclean:
 	@sudo mkdir -p $(DATA_DIR)/mysql
 	@sudo mkdir -p $(DATA_DIR)/wordpress
 	@sudo chown -R $(USER):$(USER) $(DATA_DIR)
+# 	docker system prune -af
+# 	docker volume prune -f
+
+hardclean: fclean
 	docker system prune -af
 	docker volume prune -f
 
