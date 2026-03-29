@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Chat-not-GPT</title>
+	<script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-neutral-950 text-neutral-100">
+	<div class="min-h-screen w-full md:grid md:grid-cols-[260px_1fr]">
+		<aside class="hidden md:flex flex-col border-r border-neutral-800 bg-neutral-900/80 p-4">
+			<div class="mb-6 rounded-xl bg-neutral-800/80 p-3">
+				<p class="text-sm text-neutral-300">Model</p>
+				<p class="text-lg font-semibold">chat-not-gpt</p>
+			</div>
+			<div class="space-y-2 text-sm text-neutral-300">
+				<p class="rounded-lg bg-neutral-800 px-3 py-2">New chaos chat</p>
+				<p class="rounded-lg px-3 py-2 hover:bg-neutral-800/70">Yesterday's nonsense</p>
+				<p class="rounded-lg px-3 py-2 hover:bg-neutral-800/70">Big brain hallucination</p>
+			</div>
+			<div class="mt-auto rounded-xl border border-neutral-700 p-3 text-xs text-neutral-400">
+				Troll mode enabled · static random replies
+			</div>
+		</aside>
+
+		<main class="mx-auto flex h-screen w-full max-w-4xl flex-col px-4 py-4 md:px-8 md:py-6">
+			<header class="mb-4 border-b border-neutral-800 pb-4">
+				<h1 class="text-xl font-semibold tracking-tight md:text-2xl">Chat-not-GPT</h1>
+				<p class="mt-1 text-sm text-neutral-400">A troll chatbot that yaps and returns random stuff.</p>
+			</header>
+
+			<section id="chat-box" class="flex-1 space-y-3 overflow-y-auto pr-1" aria-live="polite"></section>
+
+			<section class="mt-4 rounded-2xl border border-neutral-800 bg-neutral-900/80 p-3">
+				<div class="mb-3 flex flex-wrap gap-2 text-xs text-neutral-300">
+					<button type="button" class="preset-btn rounded-full border border-neutral-700 px-3 py-1 hover:bg-neutral-800" data-prompt="tell me something useful">Useful lie</button>
+					<button type="button" class="preset-btn rounded-full border border-neutral-700 px-3 py-1 hover:bg-neutral-800" data-prompt="explain docker like a poet">Poetic docker</button>
+					<button type="button" class="preset-btn rounded-full border border-neutral-700 px-3 py-1 hover:bg-neutral-800" data-prompt="give me life advice">Life advice</button>
+				</div>
+				<form id="chat-form" class="flex items-center gap-2">
+					<input id="user-input" type="text" placeholder="Message chat-not-gpt..." autocomplete="off" required class="w-full rounded-xl border border-neutral-700 bg-neutral-950 px-4 py-3 text-sm text-neutral-100 outline-none ring-orange-400 placeholder:text-neutral-500 focus:ring">
+					<button id="surprise-btn" type="button" class="rounded-xl border border-neutral-700 px-3 py-3 text-xs font-medium text-neutral-300 hover:bg-neutral-800">Surprise</button>
+					<button type="submit" class="rounded-xl bg-orange-500 px-4 py-3 text-sm font-semibold text-black hover:bg-orange-400">Send</button>
+				</form>
+			</section>
+		</main>
+	</div>
+
+	<script src="script.js"></script>
+</body>
+</html>

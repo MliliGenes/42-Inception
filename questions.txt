@@ -1,0 +1,7 @@
+tf is o: blind ?
+
+how nginx works again, especially with the wp container
+
+volumes are confusing me (revise re-search and redo everything)
+
+how can i serve the static page from the nginx container (what are the configs needed)

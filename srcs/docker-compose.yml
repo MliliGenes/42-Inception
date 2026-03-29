@@ -40,6 +40,7 @@ services:
       - db_password
       - wp_admin_password
       - wp_user_password
+      
   nginx:
     depends_on:
       - wordpress
@@ -51,7 +52,16 @@ services:
     ports:
       - "443:443"
     volumes:
-      - wp_data:/var/www/html:ro
+      - wp_data:/var/www/html
+  
+  static_page:
+    networks:
+      - inception_network
+    build: ./requirements/static_page
+    container_name: static_page
+    restart: always
+    ports:
+      - "3000:3000"
 
 #costume network for the project
 networks:

@@ -12,7 +12,7 @@ if [ ! -f /etc/nginx/ssl/nginx.crt ] || [ ! -f /etc/nginx/ssl/nginx.key ]; then
     -out /etc/nginx/ssl/nginx.crt
 fi
 
-echo "127.0.0.1 sel-mlil.42.fr" >> /etc/hosts
+# echo "127.0.0.1 sel-mlil.42.fr" >> /etc/hosts
 
 # Start nginx in foreground
 exec nginx -g "daemon off;"
