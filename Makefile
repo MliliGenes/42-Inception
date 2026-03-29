@@ -6,12 +6,13 @@ DATA_DIR	= /home/sel/data
 all: setup
 	$(COMPOSE) up --build -d
 	$(COMPOSE) logs mariadb
+	@echo "WordPress is available at https://sel-mlil.42.fr"
+	@echo "Chat is available at http://localhost:3000"
 
 setup:
 	@sudo mkdir -p $(DATA_DIR)/mysql
 	@sudo mkdir -p $(DATA_DIR)/wordpress
 	@sudo chown -R $(USER):$(USER) $(DATA_DIR)
-	@sudo bash -c "echo 'some text' >> /etc/privilegedfile"
 
 re: fclean all
 
@@ -25,7 +26,6 @@ fclean:
 	@sudo mkdir -p $(DATA_DIR)/mysql
 	@sudo mkdir -p $(DATA_DIR)/wordpress
 	@sudo chown -R $(USER):$(USER) $(DATA_DIR)
-	@sudo bash -c "echo 'some text' >> /etc/privilegedfile"
 
 hardclean: fclean
 	docker system prune -af

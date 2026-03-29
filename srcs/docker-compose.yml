@@ -31,9 +31,6 @@ services:
     container_name: wordpress
     restart: always
     env_file: .env
-    environment:
-      REDIS_HOST: redis
-      REDIS_PORT: "6379"
     volumes:
       - wp_data:/var/www/html
     secrets:
