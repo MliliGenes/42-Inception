@@ -1,9 +1,9 @@
 # Environment files
-srcs/.env
-.env
+# srcs/.env
+# .env
 
-# Secrets
-secrets/
+# # Secrets
+# secrets/
 
 # Docker volumes data
 */data/
