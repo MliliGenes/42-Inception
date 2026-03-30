@@ -6,8 +6,13 @@ DATA_DIR	= /home/sel/data
 all: setup
 	$(COMPOSE) up --build -d
 	$(COMPOSE) logs mariadb
-	@echo "WordPress is available at https://sel-mlil.42.fr"
-	@echo "Chat is available at http://localhost:3000"
+	@$(MAKE) links
+
+links:
+	@echo "WordPress: https://sel-mlil.42.fr"
+	@echo "Adminer: http://localhost:8080"
+	@echo "Static Page: http://localhost:3000"
+	@echo "2048: http://localhost:2048"
 
 setup:
 	@sudo mkdir -p $(DATA_DIR)/mysql
@@ -49,4 +54,6 @@ bash-wordpress:
 bash-nginx:
 	docker exec -it nginx bash
 
-.PHONY: all setup re clean fclean logs status bash-mariadb bash-wordpress bash-nginx
+
+
+.PHONY: all setup re clean fclean hardclean logs status links bash-mariadb bash-wordpress bash-nginx
