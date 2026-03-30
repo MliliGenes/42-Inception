@@ -12,6 +12,7 @@ all: setup
 setup:
 	@sudo mkdir -p $(DATA_DIR)/mysql
 	@sudo mkdir -p $(DATA_DIR)/wordpress
+	@sudo mkdir -p $(DATA_DIR)/portainer
 	@sudo chown -R $(USER):$(USER) $(DATA_DIR)
 
 re: fclean all
@@ -23,8 +24,10 @@ fclean:
 	$(COMPOSE) down -v
 	@sudo rm -rf $(DATA_DIR)/mysql
 	@sudo rm -rf $(DATA_DIR)/wordpress
+	@sudo rm -rf $(DATA_DIR)/portainer
 	@sudo mkdir -p $(DATA_DIR)/mysql
 	@sudo mkdir -p $(DATA_DIR)/wordpress
+	@sudo mkdir -p $(DATA_DIR)/portainer
 	@sudo chown -R $(USER):$(USER) $(DATA_DIR)
 
 hardclean: fclean

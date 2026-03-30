@@ -3,6 +3,7 @@ name: inception
 # Docker Compose configuration
 services:
   mariadb:
+    image: mariadb:1
     networks:
       - inception_network
     build: ./requirements/mariadb
@@ -15,6 +16,7 @@ services:
       - db_root_password
       - db_password
   redis:
+    image: redis:1
     networks:
       - inception_network
     build: ./requirements/redis
@@ -22,6 +24,7 @@ services:
     restart: always
 
   adminer:
+    image: adminer:1
     depends_on:
       - mariadb
     networks:
@@ -31,10 +34,9 @@ services:
     restart: always
     ports:
       - "8080:8080"
-    environment:
-      - ADMINER_DEFAULT_SERVER=mariadb
 
   wordpress:
+    image: wp:1
     depends_on:
       - mariadb
       - redis
@@ -52,6 +54,7 @@ services:
       - wp_user_password
       
   nginx:
+    image: nginx:1
     depends_on:
       - wordpress
     networks:
@@ -65,6 +68,7 @@ services:
       - wp_data:/var/www/html
   
   static_page:
+    image: not-gpt:1
     networks:
       - inception_network
     build: ./requirements/static_page
@@ -72,6 +76,15 @@ services:
     restart: always
     ports:
       - "3000:3000"
+  game:
+    image: game:1
+    networks:
+      - inception_network
+    build: ./requirements/2048
+    container_name: game
+    restart: always
+    ports:
+      - "2048:8080"
 
 #costume network for the project
 networks:
@@ -91,6 +104,16 @@ volumes:
       type: none
       device: /home/sel/data/wordpress
       o: bind
+  # portainer_data:
+  #   driver_opts:
+  #     type: none
+  #     device: /home/sel/data/portainer
+  #     o: bind
+  # docker-sock:
+  #   driver_opts:
+  #     type: none
+  #     device: /var/run/docker.sock
+  #     o: bind
 
 secrets:
   db_root_password:
