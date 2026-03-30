@@ -20,6 +20,7 @@ This project provides a complete web stack for a WordPress website with database
 - Adminer (database UI)
 - Static page
 - 2048 game
+- FTP server (WordPress files access)
 
 ## Start and Cleanup Commands
 
@@ -69,12 +70,14 @@ make re
 - Adminer: `http://localhost:8080`
 - Static page: `http://localhost:3000`
 - 2048: `http://localhost:2048`
+- FTP: `localhost:21` (passive ports `21000-21010`)
 
 ## Website and administration panel access
 
 - Main website is served at `https://sel-mlil.42.fr`.
 - Administration panel is available at `https://sel-mlil.42.fr/wp-admin`.
 - Adminer provides database administration at `http://localhost:8080`.
+- FTP is available on `localhost:21` using credentials from `.env` (`FTP_USER`, `FTP_PASSWORD`).
 
 ## Credentials
 
@@ -99,6 +102,7 @@ Make sure `/etc/hosts` includes:
 
 - Update secret values by editing files in `srcs/secrets/`.
 - Update non-secret configuration in `srcs/.env`.
+- FTP credentials are configured in `srcs/.env` with `FTP_USER` and `FTP_PASSWORD`.
 - After credential changes, rebuild and restart the stack:
 
 ```bash

@@ -17,6 +17,7 @@ The infrastructure includes:
 - Adminer
 - Static page
 - 2048 game
+- FTP server
 
 The stack runs on a dedicated bridge network (`inception_network`) with persistent bind-mounted data under `/home/sel/data`.
 
@@ -125,6 +126,7 @@ make re
 - Adminer: `http://localhost:8080`
 - Static page: `http://localhost:3000`
 - 2048 game: `http://localhost:2048`
+- FTP server: `localhost:21` (passive ports `21000-21010`)
 
 ## Resources
 

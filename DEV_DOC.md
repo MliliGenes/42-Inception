@@ -49,6 +49,7 @@ Also ensure `/etc/hosts` contains:
 - `adminer`
 - `static_page`
 - `game` (2048)
+- `ftp`
 
 ### Public ports
 
@@ -56,6 +57,7 @@ Also ensure `/etc/hosts` contains:
 - `8080:8080` (Adminer)
 - `3000:3000` (Static page)
 - `2048:8080` (2048 container)
+- `21:21` + `21000-21010:21000-21010` (FTP passive mode)
 
 ## Makefile Contract
 
@@ -128,6 +130,7 @@ Mapped from files in `srcs/secrets/`.
 ### Environment file
 
 - `srcs/.env` is consumed by services that need non-secret config.
+- FTP service expects `FTP_USER` and `FTP_PASSWORD` in `srcs/.env` (with defaults in container script if unset).
 
 ## Development Workflow
 
@@ -193,6 +196,7 @@ Project data persists through bind mounts configured in Compose volumes:
 
 - MariaDB data: `/home/sel/data/mysql`
 - WordPress data: `/home/sel/data/wordpress`
+- FTP container mounts WordPress data (`wp_data`) at `/var/www/html` for file transfer.
 
 Persistence behavior:
 

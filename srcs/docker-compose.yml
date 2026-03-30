@@ -87,6 +87,22 @@ services:
     ports:
       - "2048:8080"
 
+  ftp:
+    image: ftp:1
+    depends_on:
+      - wordpress
+    networks:
+      - inception_network
+    build: ./requirements/ftp
+    container_name: ftp
+    restart: always
+    env_file: .env
+    ports:
+      - "21:21"
+      - "21000-21010:21000-21010"
+    volumes:
+      - wp_data:/var/www/html
+
 #costume network for the project
 networks:
   inception_network:

@@ -13,6 +13,7 @@ links:
 	@echo "Adminer: http://localhost:8080"
 	@echo "Static Page: http://localhost:3000"
 	@echo "2048: http://localhost:2048"
+	@echo "FTP: localhost:21 (passive ports 21000-21010)"
 
 setup:
 	@sudo mkdir -p $(DATA_DIR)/mysql
